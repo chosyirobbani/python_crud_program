@@ -1,49 +1,59 @@
-## Python CRUD Application for Inventory Management
+## Python CRUD Application for Student Data Management
 
-A comprehensive Python application for managing inventory data with Create, Read, Update, and Delete (CRUD) operations.
+A Python console application designed to manage stodent records using Create, Read, Update, and Delete (CRUD) operations.
 
 ## Business Understanding
 
-This project caters to businesses in various sectors (e.g., retail, manufacturing) by providing a streamlined solution for managing product inventory. Efficient inventory management ensures product availability, minimizes stockouts and overstocking, and optimizes ordering processes.
+This project supports educational institutions in effiiently managing student records. From student enrollment to data updates and deletions, the application ensures streamlined data processing, reducing manual work and minimizing errors.
 
 **Benefits:**
 
-* Improved stock accuracy: Real-time inventory data reduces discrepancies and ensures informed decision-making.
-* Enhanced order fulfillment: Accurate stock levels enable efficient order fulfillment and customer satisfaction.
-* Reduced carrying costs: Optimized inventory management minimizes storage costs and prevents overstocking.
-* Improved demand forecasting: Data-driven insights support better forecasting of future demand.
+* Improved Data Accuracy: Centralized system to minimize duplication or inconsistency in student information.
+* Faster Decision-Making: Quick access to student performance data (e.g., exam scores) for teachers or administrators.
+* Enhanced Record Management: Organized student data improves reporting and tracking over time.
+* Data Retention Control: Recycle bin feature helps prevent accidental data loss and allows recovery.
 
 **Target Users:**
 
-This application is designed for inventory managers, warehouse staff, and sales representatives within a business to manage product stock levels, track sales, and maintain accurate inventory data.
+This application is intended for school administrators, teachers, and academic support staff who need to manage and access student information quickly and accurately.
 
 ## Features
 
 * **Create:**
-    * Add new product entries to the inventory system, specifying details like product name, description, SKU (Stock Keeping Unit), quantity on hand, reorder point, and category.
-    * Implement validation rules to ensure data accuracy (e.g., unique SKU, positive quantity).
+    * Add new student records by providing:
+      * NIS (unique 5-digit student ID)
+      * Name
+      * Gender (selection-based input)
+      * Origin City
+      * Exam Score (0–100)
+   * Built-in validation to ensure input correctness and uniqueness of NIS.
 * **Read:**
-    * Search and retrieve specific product information by name, SKU, or category.
-    * Display comprehensive product details in a user-friendly format, including stock availability, product image (optional), and reorder point.
-    * Integrate pagination for large product lists.
+    * View all student records in a tabular format.
+    * perform:
+      * sorting: By student name (A-Z or Z-A).
+      * searching: By NIS, name, gender, city of origin, or exam score.
+    * Well-structured display with headers for easy reading.
 * **Update:**
-    * Modify existing product information to reflect changes in stock levels, pricing, or product details.
-    * Provide clear confirmation or error messages for update success or failure.
+    * Modify student details based on NIS.
+    * Select and update specific fields:
+      * Name
+      * Gender
+      * City of Origin
+      * Exam Score
+    * Confirmation prompts ensure data is intentionally updated.
 * **Delete:**
-    * Allow for the removal of discontinued or obsolete products with appropriate authorization checks.
-    * Consider offering a soft delete functionality to prevent permanent data loss (optional).
-* **Reporting:**
-    * Generate reports on inventory levels, low-stock items, and sales trends to support informed inventory management and purchasing decisions.
-    * Export reports in various formats (e.g., CSV, Excel) for further analysis.
-
+    * Remove a student from the active list using NIS.
+    * Soft Delete system:
+      * Deleted records are moved to a recycle bin instead of being permanently deleted.
+      * Enables recovery if needed.
+* **Recycle Bin:**
+    * Stores deleted records.
+    * Viewable for auditing or recovery purposes.
+    * Enhances data safety and accountability.
 ## Installation
 
 1. **Prerequisites:**
-    * Python version 3.7 or later
-    * Additional dependencies:
-        * `pip install flask`
-        * `pip install sqlalchemy`
-        * `pip install psycopg2`  # For connecting to a PostgreSQL database
+    * Python 3.7 or newer (no external packages needed)
 
 2. **Installation:**
     ```bash
@@ -51,7 +61,6 @@ This application is designed for inventory managers, warehouse staff, and sales 
     cd python-inventory-crud
     pip install -r requirements.txt
     ```
-
 3. **Database Setup:**
     * Create a PostgreSQL database and configure the connection details in `config.py`.
 
@@ -63,22 +72,22 @@ This application is designed for inventory managers, warehouse staff, and sales 
     ```
 
 2. **CRUD Operations:**
-    * **Create:** Add a new product to the inventory, providing necessary details like name, SKU, and quantity.
-    * **Read:** Search for a specific product by name or SKU to view its details and stock level.
-    * **Update:** Modify the quantity of a product or update other product details.
-    * **Delete:** Remove a discontinued product from the inventory (with authorization).
-    * **Reports:** Generate reports on low-stock items or overall inventory levels for analysis.
+    * **Create:** Add a new student by entering details such as NIS (student ID), name, gender, city of origin, and exam score.
+    * **Read:** View all student records in a tabular format. Sort or search based on name, NIS, gender, origin, or score.
+    * **Update:** Modify a student's existing data (e.g., change their name, score, or origin city) using NIS as the reference.
+    * **Delete:**  Remove a student from the list by NIS. The data is soft-deleted and stored in a recycle bin.
+    * **Reports:** View deleted student records for reference or recovery.
 
 ## Data Model
 
-This project utilizes a relational database (PostgreSQL) to store product information. The following tables are used:
+This application uses in-memory data storage through Python lists and dictionaries (no database required). The data is structured as follows:
 
-* **Products:**
-    * `id` (Integer, Primary Key): Unique identifier for each product.
-    * `name` (String): Name of the product.
-    * `description` (Text): Detailed product description (optional).
-    * `sku` (String, Unique): Stock Keeping Unit for the product.
-    * `quantity` (Integer): Current stock level of the product.
-    * `reorder_point` (Integer): Minimum stock level before reordering.
-    * `category` (String): Category of the product (e.g., electronics, clothing).
-    * `image_url` (String, optional): URL for the product image.
+* **Student Records (data_siswa):**
+   * NIS (Integer, Primary Key): Unique 5-digit student ID.
+   * nama (String): Student's name
+   * jenis kelamin (Sring): Gender (laki-laki / perempuan).
+   * asal (String): City of origin.
+   * nilai (Integer): Exam score (0–100).
+
+* **Student Records (data_siswa):**
+Same structure as data_siswa, used to store removed records for audit or restoration purposes.    
