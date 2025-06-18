@@ -68,7 +68,7 @@ This application is intended for school administrators, teachers, and academic s
 
 1. **Run the application:**
     ```bash
-    python main.py
+    [python main.py](https://github.com/chosyirobbani/python_crud_program)
     ```
 
 2. **CRUD Operations:**
